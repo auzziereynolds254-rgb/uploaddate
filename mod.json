@@ -1,0 +1,38 @@
+{
+	"geode": "5.11.2",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
+	},
+	"id": "jamie.exact-upload-date",
+	"name": "Exact Upload Date",
+	"version": "v1.0.0",
+	"developer": "Jamie",
+	"description": "Shows how many days ago a level was uploaded, plus the date.",
+	"dependencies": {
+		"geode.node-ids": ">=v1.23.3"
+	},
+	"settings": {
+		"show-date": {
+			"type": "bool",
+			"default": true,
+			"name": "Show the date",
+			"description": "Show the upload date next to the number of days."
+		},
+		"date-format": {
+			"type": "string",
+			"default": "DD Mon YYYY",
+			"one-of": ["DD Mon YYYY", "DD/MM/YYYY", "MM/DD/YYYY", "YYYY-MM-DD"],
+			"name": "Date format",
+			"description": "How the upload date is written."
+		},
+		"replace-vanilla-text": {
+			"type": "bool",
+			"default": true,
+			"name": "Use days in the game's own text",
+			"description": "Also change the game's built-in \"x months ago\" text to \"x days ago\" while the level page is open."
+		}
+	}
+}
