@@ -4,7 +4,6 @@
 #include <Geode/utils/async.hpp>
 
 #include <chrono>
-#include <cstdio>
 #include <optional>
 #include <unordered_map>
 
@@ -88,13 +87,13 @@ class $modify(ExactDateLevelInfoLayer, LevelInfoLayer) {
 
     void addDateLabel() {
         auto winSize = CCDirector::get()->getWinSize();
-        CCPoint pos = { winSize.width / 2.f, winSize.height - 62.f };
+        CCPoint pos = CCPoint(winSize.width / 2.f, winSize.height - 62.f);
 
         // Sit just under the creator's name (node IDs come from Geode's Node IDs mod).
         if (auto name = this->querySelector("creator-info-menu > creator-name")) {
             auto world = name->getParent()->convertToWorldSpace(name->getPosition());
             auto local = this->convertToNodeSpace(world);
-            pos = { local.x, local.y - name->getScaledContentSize().height / 2.f - 7.f };
+            pos = CCPoint(local.x, local.y - name->getScaledContentSize().height / 2.f - 7.f);
         }
 
         auto label = CCLabelBMFont::create("Uploaded: loading...", "goldFont.fnt");
@@ -118,12 +117,11 @@ class $modify(ExactDateLevelInfoLayer, LevelInfoLayer) {
         this->setLabelText(text);
 
         if (Mod::get()->getSettingValue<bool>("replace-vanilla-text")) {
-            auto& f = m_fields;
-            f->m_level = m_level;
-            f->m_originalUploadText = std::string(m_level->m_uploadDate);
+            m_fields->m_level = m_level;
+            m_fields->m_originalUploadText = std::string(m_level->m_uploadDate);
             // The game adds " ago" itself, so this reads e.g. "412 days ago".
-            f->m_ourUploadText = days == 1 ? "1 day" : fmt::format("{} days", days);
-            m_level->m_uploadDate = f->m_ourUploadText;
+            m_fields->m_ourUploadText = days == 1 ? "1 day" : fmt::format("{} days", days);
+            m_level->m_uploadDate = m_fields->m_ourUploadText;
         }
     }
 
